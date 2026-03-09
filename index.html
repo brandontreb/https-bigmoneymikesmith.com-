@@ -3,51 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Big Money Mike - A Documentary</title>
+    <title>Big Money Mike: A Documentary Film</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:wght@400;700;900&family=Archivo:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Barlow+Condensed:wght@300;400;500;600;700;800;900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --deep-teal: #003A40;
-            --hot-pink: #FF2D8D;
-            --soft-teal: #7FE9F2;
-            --near-black: #0B0F12;
-            --off-white: #F5F7FA;
-            --gradient-teal: #00B7C6;
+            --void: #080604;
+            --ink: #131009;
+            --ink-light: #1C1812;
+            --ink-mid: #201C14;
+            --amber: #C8912D;
+            --amber-bright: #E8B84B;
+            --amber-dim: #7A5A1C;
+            --cream: #F0E6CC;
+            --parchment: #C4B090;
+            --stone: #8A7D6B;
+            --bone: #F7F1E5;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Archivo', sans-serif;
-            background: var(--off-white);
-            color: var(--near-black);
+            font-family: 'Libre Baskerville', Georgia, serif;
+            background: var(--void);
+            color: var(--cream);
             overflow-x: hidden;
         }
 
-        /* Navigation */
+        /* FILM GRAIN */
+        .film-grain {
+            position: fixed;
+            inset: -50%;
+            width: 200%;
+            height: 200%;
+            pointer-events: none;
+            z-index: 9999;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+            opacity: 0.035;
+            animation: grain 0.35s steps(1) infinite;
+        }
+
+        @keyframes grain {
+            0%   { transform: translate(0,0); }
+            10%  { transform: translate(-2%,-1%); }
+            20%  { transform: translate(1%,-2%); }
+            30%  { transform: translate(-1%,2%); }
+            40%  { transform: translate(2%,1%); }
+            50%  { transform: translate(-2%,2%); }
+            60%  { transform: translate(2%,-2%); }
+            70%  { transform: translate(-1%,-1%); }
+            80%  { transform: translate(1%,2%); }
+            90%  { transform: translate(-2%,1%); }
+            100% { transform: translate(0,0); }
+        }
+
+        /* NAV */
         nav {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: transparent;
-            backdrop-filter: none;
+            top: 0; left: 0; right: 0;
             z-index: 1000;
-            padding: 1.5rem 2rem;
-            transition: all 0.3s ease;
+            padding: 2rem 3rem;
+            transition: background 0.4s ease, padding 0.4s ease, border-color 0.4s ease;
         }
 
         nav.scrolled {
-            background: rgba(11, 15, 18, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
-            padding: 1rem 2rem;
+            background: rgba(8,6,4,0.93);
+            backdrop-filter: blur(12px);
+            padding: 1.25rem 3rem;
+            border-bottom: 1px solid rgba(200,145,45,0.15);
         }
 
         .nav-container {
@@ -59,382 +84,398 @@
         }
 
         .nav-logo {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.5rem;
-            color: var(--off-white);
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--cream);
             text-decoration: none;
-            letter-spacing: 0.1em;
             transition: color 0.3s ease;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
         }
 
-        .nav-logo:hover {
-            color: var(--hot-pink);
-        }
+        .nav-logo:hover { color: var(--amber); }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 3rem;
             list-style: none;
-            margin: 0;
-            padding: 0;
         }
 
         .nav-links a {
-            color: var(--off-white);
-            text-decoration: none;
-            font-size: 0.9rem;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.22em;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            color: var(--parchment);
+            text-decoration: none;
             transition: color 0.3s ease;
             position: relative;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
         }
 
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--hot-pink);
+            bottom: -4px; left: 0;
+            width: 0; height: 1px;
+            background: var(--amber);
             transition: width 0.3s ease;
         }
 
-        .nav-links a:hover {
-            color: var(--hot-pink);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
+        .nav-links a:hover { color: var(--amber); }
+        .nav-links a:hover::after { width: 100%; }
 
         .nav-toggle {
             display: none;
             background: none;
             border: none;
-            color: var(--off-white);
-            font-size: 1.5rem;
             cursor: pointer;
             padding: 0.5rem;
-            transition: color 0.3s ease;
+            flex-direction: column;
+            gap: 5px;
         }
 
-        .nav-toggle:hover {
-            color: var(--hot-pink);
+        .nav-toggle span {
+            display: block;
+            width: 24px;
+            height: 1.5px;
+            background: var(--cream);
+            transition: all 0.3s ease;
         }
 
-        /* Mobile Navigation */
+        .nav-toggle.active span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+        .nav-toggle.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .nav-toggle.active span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
         @media (max-width: 768px) {
-            nav {
-                padding: 1rem;
-                background: rgba(11, 15, 18, 0.95);
-                backdrop-filter: blur(10px);
-            }
-
-            .nav-toggle {
-                display: block;
-            }
-
+            nav { padding: 1.25rem 1.5rem; background: rgba(8,6,4,0.96); }
+            .nav-toggle { display: flex; }
             .nav-links {
                 position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: rgba(11, 15, 18, 0.98);
+                top: 100%; left: 0; right: 0;
+                background: rgba(8,6,4,0.98);
                 flex-direction: column;
                 gap: 0;
-                padding: 0;
                 max-height: 0;
                 overflow: hidden;
-                transition: max-height 0.3s ease;
+                transition: max-height 0.4s ease;
+                border-bottom: 1px solid rgba(200,145,45,0.15);
             }
-
-            .nav-links.active {
-                max-height: 400px;
-                border-top: 1px solid rgba(127, 233, 242, 0.2);
-            }
-
-            .nav-links a {
-                padding: 1rem 2rem;
-                display: block;
-            }
-
-            .nav-links a::after {
-                display: none;
-            }
+            .nav-links.active { max-height: 300px; }
+            .nav-links li { border-top: 1px solid rgba(200,145,45,0.08); }
+            .nav-links a { display: block; padding: 1rem 1.5rem; font-size: 0.85rem; }
+            .nav-links a::after { display: none; }
         }
 
-        /* Hero Section */
+        /* SCROLL REVEAL */
+        [data-reveal] {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.9s ease, transform 0.9s ease;
+        }
+        [data-reveal].revealed { opacity: 1; transform: translateY(0); }
+        [data-reveal-delay="1"] { transition-delay: 0.1s; }
+        [data-reveal-delay="2"] { transition-delay: 0.22s; }
+        [data-reveal-delay="3"] { transition-delay: 0.35s; }
+        [data-reveal-delay="4"] { transition-delay: 0.48s; }
+
+        /* HERO */
         .hero {
             position: relative;
-            min-height: 100vh;
+            height: 100vh;
+            min-height: 680px;
             display: flex;
             align-items: center;
             justify-content: center;
-            /* Fallback gradient background */
-            background: linear-gradient(135deg, var(--deep-teal) 0%, var(--gradient-teal) 100%);
             overflow: hidden;
         }
 
-        .hero-background {
+        .hero-bg {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            inset: 0;
             z-index: 0;
-            overflow: hidden;
         }
 
-        .hero-background img {
+        .hero-bg img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center;
+            object-position: center 20%;
+            transform: scale(1.06);
+            animation: hero-drift 22s ease-out forwards;
+            filter: grayscale(0.65) brightness(0.72);
         }
 
-        .hero-background::before {
-            content: '';
+        @keyframes hero-drift {
+            from { transform: scale(1.06); }
+            to   { transform: scale(1); }
+        }
+
+        .hero-overlay {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(0, 58, 64, 0.8) 0%, rgba(0, 183, 198, 0.75) 100%);
+            inset: 0;
             z-index: 1;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 2px,
-                    rgba(245, 247, 250, 0.03) 2px,
-                    rgba(245, 247, 250, 0.03) 4px
-                );
-            pointer-events: none;
-            opacity: 0;
-            animation: scanlines 8s infinite;
-        }
-
-        @keyframes scanlines {
-            0%, 100% { opacity: 0; }
-            50% { opacity: 1; }
+            background:
+                linear-gradient(to bottom, rgba(8,6,4,0.55) 0%, rgba(8,6,4,0) 28%),
+                linear-gradient(to top, rgba(8,6,4,1) 0%, rgba(8,6,4,0.65) 28%, rgba(8,6,4,0) 65%),
+                radial-gradient(ellipse at 50% 50%, rgba(60,50,130,0.35) 0%, rgba(40,35,100,0.2) 60%, transparent 100%);
         }
 
         .hero-content {
             position: relative;
             z-index: 2;
             text-align: center;
-            padding: 2rem;
-            max-width: 1400px;
-            animation: fadeInUp 1.2s ease-out;
+            padding: 0 2rem;
+            max-width: 1200px;
+            width: 100%;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .subtitle {
-            font-family: 'Archivo', sans-serif;
-            font-size: 0.9rem;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            color: var(--soft-teal);
-            margin-bottom: 1.5rem;
-            font-weight: 300;
-            animation: fadeInUp 1.2s ease-out 0.2s both;
-        }
-
-        h1 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(4rem, 15vw, 12rem);
-            line-height: 0.9;
-            color: var(--off-white);
-            margin-bottom: 1rem;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-            letter-spacing: 0.02em;
-            animation: fadeInUp 1.2s ease-out 0.4s both;
-        }
-
-        .tagline {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1.2rem, 3vw, 2rem);
-            font-style: italic;
-            color: var(--soft-teal);
-            margin-bottom: 3rem;
+        .hero-eyebrow {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.72rem;
             font-weight: 400;
-            animation: fadeInUp 1.2s ease-out 0.6s both;
-            transition: opacity 0.5s ease-in-out;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            letter-spacing: 0.38em;
+            text-transform: uppercase;
+            color: var(--amber);
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: fade-up 1s ease 0.3s forwards;
         }
 
-        .gold-bar {
-            width: 120px;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, var(--hot-pink), transparent);
-            margin: 0 auto 3rem;
-            animation: fadeInUp 1.2s ease-out 0.8s both, glow 3s ease-in-out infinite;
+        .hero-title-top {
+            display: block;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: clamp(3.5rem, 13vw, 10.5rem);
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--cream);
+            opacity: 0;
+            animation: fade-up 1s ease 0.5s forwards;
         }
 
-        @keyframes glow {
-            0%, 100% { opacity: 0.6; box-shadow: 0 0 10px var(--hot-pink); }
-            50% { opacity: 1; box-shadow: 0 0 20px var(--hot-pink); }
+        .hero-title-main {
+            display: block;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(5rem, 21vw, 17rem);
+            font-weight: 300;
+            font-style: italic;
+            line-height: 0.85;
+            color: var(--cream);
+            letter-spacing: -0.01em;
+            opacity: 0;
+            animation: fade-up 1.2s ease 0.7s forwards;
         }
 
-        .scroll-indicator {
+        .hero-rule {
+            width: 90px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--amber), transparent);
+            margin: 2rem auto;
+            opacity: 0;
+            animation: fade-in 1s ease 1s forwards;
+        }
+
+        .hero-tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(0.95rem, 2.2vw, 1.35rem);
+            font-style: italic;
+            font-weight: 300;
+            color: var(--parchment);
+            max-width: 680px;
+            margin: 0 auto 2.75rem;
+            line-height: 1.65;
+            opacity: 0;
+            animation: fade-up 1s ease 1.1s forwards;
+            transition: opacity 0.5s ease;
+        }
+
+        .hero-cta {
+            opacity: 0;
+            animation: fade-up 1s ease 1.3s forwards;
+        }
+
+        .btn-outline {
+            display: inline-block;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--amber);
+            border: 1px solid var(--amber-dim);
+            padding: 0.95rem 2.5rem;
+            text-decoration: none;
+            transition: color 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+        }
+
+        .btn-outline:hover {
+            color: var(--void);
+            background: var(--amber);
+            border-color: var(--amber);
+        }
+
+        .hero-scroll {
             position: absolute;
-            bottom: 3rem;
+            bottom: 2.5rem;
             left: 50%;
             transform: translateX(-50%);
-            color: var(--off-white);
-            font-size: 0.8rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            opacity: 0.7;
-            animation: bounce 2s infinite, fadeInUp 1.2s ease-out 1s both;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
             cursor: pointer;
+            opacity: 0;
+            animation: fade-in 1.2s ease 1.8s forwards;
         }
 
-        @keyframes bounce {
-            0%, 100% { transform: translate(-50%, 0); }
-            50% { transform: translate(-50%, 10px); }
+        .hero-scroll span {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--stone);
         }
 
-        /* Trailer Section */
-        .trailer-section {
-            padding: 8rem 2rem;
-            background: var(--off-white);
-            position: relative;
+        .scroll-line {
+            width: 1px;
+            height: 48px;
+            background: linear-gradient(to bottom, var(--amber-dim), transparent);
+            animation: scroll-pulse 2.2s ease-in-out infinite;
         }
 
-        .trailer-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 200px;
-            background: linear-gradient(to bottom, var(--deep-teal), transparent);
-            opacity: 0.1;
+        @keyframes scroll-pulse {
+            0%, 100% { opacity: 0.35; transform: scaleY(1); transform-origin: top; }
+            50%       { opacity: 1;    transform: scaleY(1.15); transform-origin: top; }
+        }
+
+        @keyframes fade-up {
+            from { opacity: 0; transform: translateY(22px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fade-in {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        /* SECTION COMMON */
+        .section-label {
+            display: block;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.68rem;
+            font-weight: 500;
+            letter-spacing: 0.42em;
+            text-transform: uppercase;
+            color: var(--amber);
+            margin-bottom: 1rem;
         }
 
         .section-title {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            text-align: center;
-            color: var(--deep-teal);
-            margin-bottom: 1rem;
-            letter-spacing: 0.05em;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.4rem, 5vw, 3.8rem);
+            font-weight: 300;
+            color: var(--cream);
+            letter-spacing: 0.02em;
         }
 
-        .section-subtitle {
+        .section-header {
             text-align: center;
-            color: var(--hot-pink);
-            font-size: 1.1rem;
             margin-bottom: 4rem;
-            font-style: italic;
+        }
+
+        /* TRAILER */
+        .trailer-section {
+            padding: 8rem 2rem;
+            background: var(--ink);
+        }
+
+        .film-strip {
+            height: 10px;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent 0px, transparent 6px,
+                rgba(200,145,45,0.25) 6px, rgba(200,145,45,0.25) 7px,
+                transparent 7px, transparent 20px
+            );
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .video-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
         }
 
         .video-container {
-            max-width: 1200px;
-            margin: 0 auto;
             aspect-ratio: 16 / 9;
-            background: var(--near-black);
-            border-radius: 4px;
-            overflow: hidden;
-            box-shadow: 
-                0 20px 60px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(127, 233, 242, 0.2);
+            background: var(--void);
             position: relative;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
         }
 
-        .video-container:hover {
-            transform: translateY(-5px);
-            box-shadow: 
-                0 30px 80px rgba(0, 0, 0, 0.4),
-                0 0 0 1px var(--soft-teal);
-        }
-
-        .video-placeholder {
-            width: 100%;
-            height: 100%;
+        .video-inner {
+            position: absolute;
+            inset: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: 
-                linear-gradient(135deg, rgba(0, 58, 64, 0.95) 0%, rgba(11, 15, 18, 0.98) 100%),
-                url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23F5F7FA" fill-opacity="0.05"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
-            color: var(--off-white);
-            text-align: center;
-            padding: 2rem;
+            background: linear-gradient(135deg, rgba(20,18,14,0.96) 0%, rgba(8,6,4,0.99) 100%);
         }
 
-        .play-icon {
-            width: 80px;
-            height: 80px;
-            border: 3px solid var(--hot-pink);
+        .play-circle {
+            width: 88px;
+            height: 88px;
+            border: 1px solid var(--amber-dim);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 2rem;
-            transition: all 0.3s ease;
             cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
         }
 
-        .play-icon:hover {
-            background: var(--hot-pink);
-            border-color: var(--soft-teal);
-            transform: scale(1.1);
-            box-shadow: 0 0 20px var(--hot-pink);
-        }
-
-        .play-icon::after {
+        .play-circle::after {
             content: '';
-            width: 0;
-            height: 0;
-            border-left: 20px solid var(--hot-pink);
-            border-top: 12px solid transparent;
-            border-bottom: 12px solid transparent;
-            margin-left: 5px;
-            transition: border-left-color 0.3s ease;
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            border: 1px solid rgba(200,145,45,0.12);
         }
 
-        .play-icon:hover::after {
-            border-left-color: var(--off-white);
+        .play-circle svg {
+            width: 26px;
+            height: 26px;
+            fill: var(--amber);
+            margin-left: 4px;
+            transition: fill 0.3s ease;
         }
 
-        .placeholder-text {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.5rem;
-            letter-spacing: 0.1em;
-            color: var(--soft-teal);
+        .play-circle:hover {
+            border-color: var(--amber);
+            box-shadow: 0 0 28px rgba(200,145,45,0.22);
         }
 
-        /* Story Section */
+        .play-circle:hover svg { fill: var(--amber-bright); }
+
+        .coming-soon-text {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.42em;
+            text-transform: uppercase;
+            color: var(--stone);
+        }
+
+        /* STORY */
         .story-section {
-            padding: 8rem 2rem;
-            background: var(--deep-teal);
-            color: var(--off-white);
+            padding: 9rem 2rem;
+            background: var(--ink-mid);
             position: relative;
             overflow: hidden;
         }
@@ -442,51 +483,296 @@
         .story-section::before {
             content: 'BMM';
             position: absolute;
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 30vw;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 38vw;
+            font-weight: 700;
+            font-style: italic;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            opacity: 0.03;
-            letter-spacing: 0.1em;
+            opacity: 0.02;
             pointer-events: none;
+            color: var(--amber);
+            white-space: nowrap;
         }
 
-        .story-content {
-            max-width: 800px;
+        .story-inner {
+            max-width: 760px;
             margin: 0 auto;
             position: relative;
             z-index: 1;
+            text-align: center;
         }
 
-        .story-content h2 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            margin-bottom: 2rem;
-            color: var(--soft-teal);
-            letter-spacing: 0.05em;
+        .story-pull-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.45rem, 2.8vw, 2.1rem);
+            font-style: italic;
+            font-weight: 300;
+            color: var(--amber-bright);
+            line-height: 1.55;
+            padding: 2.5rem 0;
+            position: relative;
+            margin: 1.5rem 0 3rem;
         }
 
-        .story-content p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-            opacity: 0.9;
+        .story-pull-quote::before,
+        .story-pull-quote::after {
+            content: '';
+            display: block;
+            width: 36px;
+            height: 1px;
+            background: var(--amber-dim);
+            margin: 1.5rem auto;
         }
 
-        .story-content p:first-of-type::first-letter {
-            font-family: 'Playfair Display', serif;
-            font-size: 4rem;
-            line-height: 1;
+        .story-text {
+            font-size: 1.03rem;
+            line-height: 1.88;
+            color: var(--parchment);
+            text-align: left;
+        }
+
+        .story-text p { margin-bottom: 1.75rem; }
+
+        .story-text p:first-child::first-letter {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            line-height: 0.8;
             float: left;
-            margin-right: 0.5rem;
-            color: var(--hot-pink);
+            margin-right: 0.12em;
+            margin-top: 0.08em;
+            color: var(--amber);
         }
 
-        /* Newsletter Section */
-        .newsletter-section {
+        /* STATS */
+        .stats-section {
+            padding: 0;
+            background: var(--void);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(200,145,45,0.055) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 50%, rgba(200,145,45,0.055) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .stats-grid {
+            max-width: 100%;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border-top: 1px solid rgba(200,145,45,0.12);
+            border-bottom: 1px solid rgba(200,145,45,0.12);
+            position: relative;
+        }
+
+        .stat-item {
+            padding: 5rem 2.5rem;
+            text-align: center;
+            border-right: 1px solid rgba(200,145,45,0.1);
+        }
+
+        .stat-item:last-child { border-right: none; }
+
+        .stat-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3.2rem, 5.5vw, 5.2rem);
+            font-weight: 300;
+            color: var(--amber);
+            line-height: 1;
+            margin-bottom: 0.75rem;
+            display: block;
+            letter-spacing: -0.01em;
+        }
+
+        .stat-prefix,
+        .stat-suffix {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 300;
+            font-size: 0.55em;
+            color: var(--amber-dim);
+            vertical-align: super;
+        }
+
+        .stat-label {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.68rem;
+            font-weight: 500;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--stone);
+            line-height: 1.7;
+        }
+
+        @media (max-width: 900px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .stat-item:nth-child(2) { border-right: none; }
+            .stat-item:nth-child(3),
+            .stat-item:nth-child(4) { border-top: 1px solid rgba(200,145,45,0.1); }
+            .stat-item:nth-child(4) { border-right: none; }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid { grid-template-columns: 1fr; }
+            .stat-item { border-right: none; border-bottom: 1px solid rgba(200,145,45,0.1); padding: 3.5rem 2rem; }
+            .stat-item:last-child { border-bottom: none; }
+        }
+
+        /* GALLERY */
+        .gallery-section {
             padding: 8rem 2rem;
-            background: var(--near-black);
+            background: var(--ink);
+        }
+
+        .gallery-grid {
+            max-width: 1300px;
+            margin: 4rem auto 0;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 260px;
+            gap: 4px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            background: var(--void);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.65s ease, filter 0.65s ease;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(8,6,4,0.55);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-overlay-icon {
+            width: 48px;
+            height: 48px;
+            border: 1px solid rgba(200,145,45,0.55);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: scale(0.8);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            color: var(--amber);
+            font-size: 1.4rem;
+            font-weight: 300;
+            line-height: 1;
+        }
+
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+        .gallery-item:hover img { transform: scale(1.05); filter: brightness(0.8); }
+        .gallery-item:hover .gallery-overlay-icon { transform: scale(1); border-color: var(--amber); }
+
+        @media (max-width: 1100px) {
+            .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; }
+        }
+        @media (max-width: 480px) {
+            .gallery-grid { grid-template-columns: 1fr; grid-auto-rows: 240px; }
+        }
+
+        /* LIGHTBOX */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(8,6,4,0.97);
+            z-index: 9998;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox.active { display: flex; }
+
+        .lightbox-img-wrap {
+            position: relative;
+            max-width: 90vw;
+            max-height: 85vh;
+            animation: fade-in 0.3s ease;
+        }
+
+        .lightbox-img-wrap img {
+            max-width: 100%;
+            max-height: 85vh;
+            object-fit: contain;
+            display: block;
+        }
+
+        .lightbox-close {
+            position: fixed;
+            top: 2rem; right: 2rem;
+            width: 44px; height: 44px;
+            background: none;
+            border: 1px solid rgba(200,145,45,0.25);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: border-color 0.3s ease;
+        }
+
+        .lightbox-close::before,
+        .lightbox-close::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 1px;
+            background: var(--cream);
+        }
+
+        .lightbox-close::before { transform: rotate(45deg); }
+        .lightbox-close::after  { transform: rotate(-45deg); }
+        .lightbox-close:hover { border-color: var(--amber); }
+
+        .lightbox-nav {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: 1px solid rgba(200,145,45,0.18);
+            color: var(--cream);
+            width: 50px; height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-nav:hover { border-color: var(--amber); color: var(--amber); }
+        .lightbox-prev { left: 2rem; }
+        .lightbox-next { right: 2rem; }
+
+        /* NEWSLETTER */
+        .newsletter-section {
+            padding: 9rem 2rem;
+            background: var(--ink-light);
             position: relative;
             overflow: hidden;
         }
@@ -494,308 +780,171 @@
         .newsletter-section::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(255, 45, 141, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 50%, rgba(127, 233, 242, 0.1) 0%, transparent 50%);
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 110%, rgba(200,145,45,0.07) 0%, transparent 55%);
             pointer-events: none;
         }
 
-        .newsletter-content {
-            max-width: 700px;
+        .newsletter-inner {
+            max-width: 580px;
             margin: 0 auto;
             text-align: center;
             position: relative;
             z-index: 1;
         }
 
-        .newsletter-content h2 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            color: var(--off-white);
-            margin-bottom: 1rem;
-            letter-spacing: 0.05em;
-        }
+        .newsletter-inner .section-title { margin-bottom: 1.25rem; }
 
-        .newsletter-content p {
-            color: var(--off-white);
-            font-size: 1.1rem;
+        .newsletter-subtitle {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 0.95rem;
+            font-style: italic;
+            color: var(--stone);
             margin-bottom: 3rem;
-            opacity: 0.9;
+            line-height: 1.75;
         }
 
         .signup-form {
             display: flex;
-            gap: 1rem;
-            max-width: 500px;
+            max-width: 460px;
             margin: 0 auto;
-            flex-wrap: wrap;
         }
 
         .email-input {
             flex: 1;
-            min-width: 250px;
-            padding: 1rem 1.5rem;
-            font-size: 1rem;
-            border: 2px solid rgba(127, 233, 242, 0.3);
-            background: rgba(0, 58, 64, 0.3);
-            color: var(--off-white);
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            font-family: 'Archivo', sans-serif;
-        }
-
-        .email-input::placeholder {
-            color: rgba(245, 247, 250, 0.5);
-        }
-
-        .email-input:focus {
+            padding: 1rem 1.4rem;
+            font-family: 'Libre Baskerville', serif;
+            font-size: 0.88rem;
+            background: rgba(8,6,4,0.6);
+            border: 1px solid rgba(200,145,45,0.18);
+            border-right: none;
+            color: var(--cream);
             outline: none;
-            border-color: var(--soft-teal);
-            background: rgba(0, 58, 64, 0.5);
-            box-shadow: 0 0 0 3px rgba(127, 233, 242, 0.1);
+            transition: border-color 0.3s ease;
         }
+
+        .email-input::placeholder { color: var(--stone); font-style: italic; }
+        .email-input:focus { border-color: rgba(200,145,45,0.45); }
 
         .submit-btn {
-            padding: 1rem 2.5rem;
-            font-size: 1rem;
-            font-family: 'Bebas Neue', sans-serif;
-            letter-spacing: 0.1em;
-            background: var(--hot-pink);
-            color: var(--off-white);
-            border: none;
-            border-radius: 4px;
+            padding: 1rem 1.75rem;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            background: var(--amber);
+            color: var(--void);
+            border: 1px solid var(--amber);
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 400;
+            transition: background 0.3s ease;
+            white-space: nowrap;
         }
 
-        .submit-btn:hover {
-            background: var(--soft-teal);
-            color: var(--near-black);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(255, 45, 141, 0.4);
-        }
-
-        .submit-btn:active {
-            transform: translateY(0);
-        }
+        .submit-btn:hover { background: var(--amber-bright); border-color: var(--amber-bright); }
 
         .success-message {
             display: none;
             margin-top: 1.5rem;
-            padding: 1rem;
-            background: rgba(0, 58, 64, 0.5);
-            border: 1px solid var(--soft-teal);
-            border-radius: 4px;
-            color: var(--off-white);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            font-style: italic;
+            color: var(--amber);
         }
 
-        .success-message.show {
-            display: block;
-            animation: fadeInUp 0.5s ease-out;
+        .success-message.show { display: block; animation: fade-in 0.5s ease; }
+
+        @media (max-width: 500px) {
+            .signup-form { flex-direction: column; }
+            .email-input { border-right: 1px solid rgba(200,145,45,0.18); border-bottom: none; }
         }
 
-        /* Footer */
+        /* FOOTER */
         footer {
-            padding: 3rem 2rem;
-            background: var(--deep-teal);
-            color: var(--off-white);
-            text-align: center;
+            padding: 4rem 2rem;
+            background: var(--void);
+            border-top: 1px solid rgba(200,145,45,0.08);
         }
 
-        footer p {
-            opacity: 0.7;
-            font-size: 0.9rem;
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.75rem;
+        }
+
+        .footer-logo {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--stone);
         }
 
         .social-links {
-            margin-top: 1rem;
             display: flex;
-            gap: 1.5rem;
-            justify-content: center;
+            gap: 2.5rem;
         }
 
         .social-links a {
-            color: var(--hot-pink);
-            text-decoration: none;
-            font-size: 0.9rem;
-            letter-spacing: 0.1em;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.68rem;
+            font-weight: 500;
+            letter-spacing: 0.25em;
             text-transform: uppercase;
+            color: var(--stone);
+            text-decoration: none;
             transition: color 0.3s ease;
         }
 
-        .social-links a:hover {
-            color: var(--soft-teal);
+        .social-links a:hover { color: var(--amber); }
+
+        .footer-production {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 0.8rem;
+            font-style: italic;
+            color: var(--stone);
+            opacity: 0.65;
         }
 
-        /* Responsive */
+        .footer-production a {
+            color: var(--amber-dim);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-production a:hover { color: var(--amber); }
+
+        .footer-copyright {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.62rem;
+            letter-spacing: 0.15em;
+            color: var(--stone);
+            opacity: 0.4;
+        }
+
+        /* RESPONSIVE PADDING */
         @media (max-width: 768px) {
-            .signup-form {
-                flex-direction: column;
-            }
-
-            .email-input {
-                min-width: 100%;
-            }
-
             .trailer-section,
             .story-section,
-            .newsletter-section {
-                padding: 5rem 2rem;
-            }
-        }
-
-        /* Gallery Section */
-        .gallery-section {
-            padding: 8rem 2rem;
-            background: var(--off-white);
-            position: relative;
-        }
-
-        .gallery-grid {
-            max-width: 1200px;
-            margin: 3rem auto 0;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .gallery-item {
-            position: relative;
-            aspect-ratio: 16 / 9;
-            overflow: hidden;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
-
-        /* Lightbox */
-        .lightbox {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(11, 15, 18, 0.95);
-            z-index: 9999;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-        }
-
-        .lightbox.active {
-            display: flex;
-        }
-
-        .lightbox-content {
-            max-width: 90%;
-            max-height: 90%;
-            position: relative;
-            animation: fadeInUp 0.3s ease-out;
-        }
-
-        .lightbox-content img {
-            max-width: 100%;
-            max-height: 90vh;
-            object-fit: contain;
-            border-radius: 4px;
-        }
-
-        .lightbox-close {
-            position: absolute;
-            top: -3rem;
-            right: 0;
-            background: none;
-            border: none;
-            color: var(--off-white);
-            font-size: 2rem;
-            cursor: pointer;
-            padding: 0.5rem 1rem;
-            transition: color 0.3s ease;
-            font-family: Arial, sans-serif;
-            line-height: 1;
-        }
-
-        .lightbox-close:hover {
-            color: var(--hot-pink);
-        }
-
-        .lightbox-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 58, 64, 0.8);
-            border: none;
-            color: var(--off-white);
-            font-size: 2rem;
-            cursor: pointer;
-            padding: 1rem 1.5rem;
-            transition: all 0.3s ease;
-            border-radius: 4px;
-        }
-
-        .lightbox-nav:hover {
-            background: var(--deep-teal);
-            color: var(--hot-pink);
-        }
-
-        .lightbox-prev {
-            left: 2rem;
-        }
-
-        .lightbox-next {
-            right: 2rem;
-        }
-
-        @media (max-width: 768px) {
-            .gallery-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .lightbox-nav {
-                padding: 0.5rem 1rem;
-                font-size: 1.5rem;
-            }
-
-            .lightbox-prev {
-                left: 0.5rem;
-            }
-
-            .lightbox-next {
-                right: 0.5rem;
-            }
+            .gallery-section,
+            .newsletter-section { padding: 5rem 1.5rem; }
         }
     </style>
 </head>
 <body>
+
+    <div class="film-grain" aria-hidden="true"></div>
+
     <!-- Navigation -->
     <nav id="navbar">
         <div class="nav-container">
             <a href="#" class="nav-logo">Big Money Mike</a>
-            <button class="nav-toggle" id="navToggle">
-                <span>☰</span>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
             </button>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#trailer">Trailer</a></li>
@@ -806,259 +955,318 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section class="hero">
-        <div class="hero-background">
+        <div class="hero-bg">
             <img src="bmm-images/Justify-Belmont-Finish-Edit.jpeg" alt="Mike Smith winning the Triple Crown on Justify at Belmont">
         </div>
+        <div class="hero-overlay"></div>
         <div class="hero-content">
-            <div class="subtitle">A Documentary Film</div>
-            <h1>BIG MONEY<br>MIKE</h1>
-            <div class="gold-bar"></div>
-            <p class="tagline">In a sport measured in milliseconds, he's forged a career spanning four decades. Can Mike Smith beat the clock one more time?</p>
+            <p class="hero-eyebrow">A Documentary Film &nbsp;&middot;&nbsp; Long Odds Productions</p>
+            <span class="hero-title-top">Big Money</span>
+            <span class="hero-title-main">Mike</span>
+            <div class="hero-rule"></div>
+            <p class="hero-tagline">In a sport measured in milliseconds, he's forged a career spanning four decades. Can Mike Smith beat the clock one more time?</p>
+            <div class="hero-cta">
+                <a href="#trailer" class="btn-outline">Watch Trailer</a>
+            </div>
         </div>
-        <div class="scroll-indicator">Scroll Down ↓</div>
+        <div class="hero-scroll" id="heroScroll">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
     </section>
 
-    <!-- Trailer Section -->
+    <!-- Trailer -->
     <section class="trailer-section" id="trailer">
-        <h2 class="section-title">Watch The Trailer</h2>
-        <p class="section-subtitle">Coming Soon</p>
-        
-        <div class="video-container">
-            <div class="video-placeholder">
-                <div class="play-icon"></div>
-                <div class="placeholder-text">Trailer Coming Soon</div>
+        <div class="section-header" data-reveal>
+            <span class="section-label">The Film</span>
+            <h2 class="section-title">Watch The Trailer</h2>
+        </div>
+        <div class="video-wrapper" data-reveal data-reveal-delay="1">
+            <div class="film-strip" style="margin-bottom: 4px;"></div>
+            <div class="video-container">
+                <div class="video-inner">
+                    <div class="play-circle">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                    <div class="coming-soon-text">Trailer &nbsp;&middot;&nbsp; Coming Soon</div>
+                </div>
+                <!-- Replace with embed when ready:
+                <iframe width="100%" height="100%" src="YOUR_VIDEO_URL" frameborder="0" allowfullscreen></iframe>
+                -->
             </div>
-            <!-- Replace the placeholder above with your video embed when ready:
-            <iframe width="100%" height="100%" src="YOUR_VIDEO_URL" frameborder="0" allowfullscreen></iframe>
-            -->
+            <div class="film-strip" style="margin-top: 4px;"></div>
         </div>
     </section>
 
-    <!-- Story Section -->
+    <!-- Stats -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item" data-reveal>
+                <span class="stat-number">
+                    <span class="stat-count" data-target="40">0</span><span class="stat-suffix">+</span>
+                </span>
+                <div class="stat-label">Years at the<br>Highest Level</div>
+            </div>
+            <div class="stat-item" data-reveal data-reveal-delay="1">
+                <span class="stat-number">
+                    <span class="stat-prefix">$</span><span class="stat-count" data-target="356">0</span><span class="stat-suffix">M+</span>
+                </span>
+                <div class="stat-label">Career<br>Earnings</div>
+            </div>
+            <div class="stat-item" data-reveal data-reveal-delay="2">
+                <span class="stat-number">
+                    <span class="stat-count" data-target="52">0</span>
+                </span>
+                <div class="stat-label">Oldest Triple Crown<br>Winner in History</div>
+            </div>
+            <div class="stat-item" data-reveal data-reveal-delay="3">
+                <span class="stat-number">
+                    <span class="stat-prefix">#</span><span class="stat-count" data-target="1">0</span>
+                </span>
+                <div class="stat-label">All-Time Grade 1<br>Stakes Wins Leader</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story -->
     <section class="story-section" id="story">
-        <div class="story-content">
-            <h2>The Story</h2>
-            <p>In 1965, Dexter, New Mexico was so small the census didn't bother to keep population numbers. Humble origins for Mike Smith, a boy so eager to begin his ascent to greatness he altered his birth certificate to race at 15 when the legal minimum was 16.</p>
-            
-            <p>A decade later Smith would emerge as America's number one Jockey, breaking records for Stakes wins and pulling in millions in earnings. A meteoric rise that came to a crashing halt when a fall resulted in a broken back and collapsed lung. Two months in a body cast could have meant the end of a hall of fame career, but Mike Smith was just getting started.</p>
-            
-            <p>In 2005, Smith would ride an impossible longshot to victory at the Kentucky Derby, kicking off the second half of his career that was so marked by high profile purses that he was given the moniker "Big Money" Mike. It should be no surprise he holds the record for Grade 1 Stakes victories with accumulated earnings over $356 Million. As if the legend couldn't grow any larger, in 2018, 35 years after his first professional win, 15 years after induction into the Horse Racing Hall of Fame, Mike Smith would go on to win the TRIPLE CROWN atop Justify. Only 11 other riders in history have won the Triple Crown, at 52, Mike was the oldest.</p>
-            
-            <p>BIG MONEY: THE MIKE SMITH STORY will follow this racing great who, after four decades of competition at the highest level, embarks on one last run for the Kentucky Derby.</p>
+        <div class="story-inner">
+            <span class="section-label" data-reveal>The Legend</span>
+            <h2 class="section-title" data-reveal data-reveal-delay="1">The Story</h2>
+
+            <blockquote class="story-pull-quote" data-reveal data-reveal-delay="2">
+                "All I need is one horse. One horse can take you around the world and back again."
+            </blockquote>
+
+            <div class="story-text" data-reveal data-reveal-delay="3">
+                <p>In 1965, Dexter, New Mexico was so small the census didn't bother to keep population numbers. Humble origins for Mike Smith, a boy so eager to begin his ascent to greatness he altered his birth certificate to race at 15 when the legal minimum was 16.</p>
+
+                <p>A decade later Smith would emerge as America's number one Jockey, breaking records for Stakes wins and pulling in millions in earnings. A meteoric rise that came to a crashing halt when a fall resulted in a broken back and collapsed lung. Two months in a body cast could have meant the end of a hall of fame career, but Mike Smith was just getting started.</p>
+
+                <p>In 2005, Smith would ride an impossible longshot to victory at the Kentucky Derby, kicking off the second half of his career that was so marked by high profile purses that he was given the moniker "Big Money" Mike. It should be no surprise he holds the record for Grade 1 Stakes victories with accumulated earnings over $356 Million. As if the legend couldn't grow any larger, in 2018, 35 years after his first professional win, 15 years after induction into the Horse Racing Hall of Fame, Mike Smith would go on to win the TRIPLE CROWN atop Justify. Only 11 other riders in history have won the Triple Crown, at 52, Mike was the oldest.</p>
+
+                <p>Big Money Mike: A Documentary Film will follow this racing great who, after four decades of competition at the highest level, embarks on one last run for the Kentucky Derby.</p>
+            </div>
         </div>
     </section>
 
-    <!-- Gallery Section -->
+    <!-- Gallery -->
     <section class="gallery-section" id="gallery">
-        <h2 class="section-title">Gallery</h2>
-        <p class="section-subtitle">Moments from a legendary career</p>
-        
-        <div class="gallery-grid">
-            <div class="gallery-item" data-image="bmm-images/Justify-Belmont-Finish-Edit.jpeg">
-                <img src="bmm-images/Justify-Belmont-Finish-Edit.jpeg" alt="Triple Crown victory at Belmont" loading="lazy">
+        <div class="section-header" data-reveal>
+            <span class="section-label">The Record</span>
+            <h2 class="section-title">Gallery</h2>
+        </div>
+        <div class="gallery-grid" data-reveal data-reveal-delay="2">
+            <div class="gallery-item" data-image="bmm-images/Day 1 Selects_01_00_32_15.jpg">
+                <img src="bmm-images/Day 1 Selects_01_00_32_15.jpg" alt="Day 1 on set" loading="lazy">
+                <div class="gallery-overlay"><div class="gallery-overlay-icon">+</div></div>
             </div>
-            <div class="gallery-item" data-image="bmm-images/Justify-Belmont-Finish.jpeg">
-                <img src="bmm-images/Justify-Belmont-Finish.jpeg" alt="Crossing the finish line at Belmont" loading="lazy">
+            <div class="gallery-item" data-image="bmm-images/Day 1 Selects_01_18_20_09.jpg">
+                <img src="bmm-images/Day 1 Selects_01_18_20_09.jpg" alt="Day 1 footage" loading="lazy">
+                <div class="gallery-overlay"><div class="gallery-overlay-icon">+</div></div>
             </div>
-            <div class="gallery-item" data-image="bmm-images/Throwing_Roses_2.jpeg">
-                <img src="bmm-images/Throwing_Roses_2.jpeg" alt="Celebrating victory" loading="lazy">
+            <div class="gallery-item" data-image="bmm-images/Day 1 Selects_01_19_47_06.jpg">
+                <img src="bmm-images/Day 1 Selects_01_19_47_06.jpg" alt="Day 1 footage" loading="lazy">
+                <div class="gallery-overlay"><div class="gallery-overlay-icon">+</div></div>
             </div>
-            <div class="gallery-item" data-image="bmm-images/All_Glory.avif">
-                <img src="bmm-images/All_Glory.avif" alt="Big Money Mike racing" loading="lazy">
+            <div class="gallery-item" data-image="bmm-images/Interviews_03_16_37_10.jpg">
+                <img src="bmm-images/Interviews_03_16_37_10.jpg" alt="Interview footage" loading="lazy">
+                <div class="gallery-overlay"><div class="gallery-overlay-icon">+</div></div>
             </div>
-            <div class="gallery-item" data-image="bmm-images/Only_Clean_Horse.avif">
-                <img src="bmm-images/Only_Clean_Horse.avif" alt="Mike Smith in action" loading="lazy">
+            <div class="gallery-item" data-image="bmm-images/Interviews_04_29_04_15.jpg">
+                <img src="bmm-images/Interviews_04_29_04_15.jpg" alt="Interview footage" loading="lazy">
+                <div class="gallery-overlay"><div class="gallery-overlay-icon">+</div></div>
             </div>
-            <div class="gallery-item" data-image="bmm-images/Throwing_Roses.avif">
-                <img src="bmm-images/Throwing_Roses.avif" alt="Victory celebration" loading="lazy">
+            <div class="gallery-item" data-image="bmm-images/Lonely Mount.jpg">
+                <img src="bmm-images/Lonely Mount.jpg" alt="Lonely Mount" loading="lazy">
+                <div class="gallery-overlay"><div class="gallery-overlay-icon">+</div></div>
+            </div>
+            <div class="gallery-item" data-image="bmm-images/Timeline 1_01_00_48_09.jpg">
+                <img src="bmm-images/Timeline 1_01_00_48_09.jpg" alt="Timeline footage" loading="lazy">
+                <div class="gallery-overlay"><div class="gallery-overlay-icon">+</div></div>
+            </div>
+            <div class="gallery-item" data-image="bmm-images/Timeline 1_01_01_08_05.jpg">
+                <img src="bmm-images/Timeline 1_01_01_08_05.jpg" alt="Timeline footage" loading="lazy">
+                <div class="gallery-overlay"><div class="gallery-overlay-icon">+</div></div>
+            </div>
+            <div class="gallery-item" data-image="bmm-images/Timeline 1_01_06_07_06.jpg">
+                <img src="bmm-images/Timeline 1_01_06_07_06.jpg" alt="Timeline footage" loading="lazy">
+                <div class="gallery-overlay"><div class="gallery-overlay-icon">+</div></div>
+            </div>
+            <div class="gallery-item" data-image="bmm-images/Timeline 1_01_10_09_02.jpg">
+                <img src="bmm-images/Timeline 1_01_10_09_02.jpg" alt="Timeline footage" loading="lazy">
+                <div class="gallery-overlay"><div class="gallery-overlay-icon">+</div></div>
+            </div>
+            <div class="gallery-item" data-image="bmm-images/Timeline 1_01_14_10_23.jpg">
+                <img src="bmm-images/Timeline 1_01_14_10_23.jpg" alt="Timeline footage" loading="lazy">
+                <div class="gallery-overlay"><div class="gallery-overlay-icon">+</div></div>
+            </div>
+            <div class="gallery-item" data-image="bmm-images/Timeline 1_01_16_34_18.jpg">
+                <img src="bmm-images/Timeline 1_01_16_34_18.jpg" alt="Timeline footage" loading="lazy">
+                <div class="gallery-overlay"><div class="gallery-overlay-icon">+</div></div>
             </div>
         </div>
     </section>
 
     <!-- Lightbox -->
-    <div class="lightbox" id="lightbox">
-        <div class="lightbox-content">
-            <button class="lightbox-close" id="lightboxClose">&times;</button>
-            <button class="lightbox-nav lightbox-prev" id="lightboxPrev">&larr;</button>
-            <button class="lightbox-nav lightbox-next" id="lightboxNext">&rarr;</button>
+    <div class="lightbox" id="lightbox" role="dialog" aria-label="Image viewer">
+        <button class="lightbox-close" id="lightboxClose" aria-label="Close"></button>
+        <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous">&#8592;</button>
+        <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next">&#8594;</button>
+        <div class="lightbox-img-wrap">
             <img src="" alt="" id="lightboxImage">
         </div>
     </div>
 
-    <!-- Newsletter Section -->
+    <!-- Newsletter -->
     <section class="newsletter-section" id="updates">
-        <div class="newsletter-content">
-            <h2>Stay Updated</h2>
-            <p>Be the first to know when Big Money Mike premieres. Get exclusive behind-the-scenes content and updates straight to your inbox.</p>
-            
-            <form class="signup-form" id="signupForm" action="https://gmail.us6.list-manage.com/subscribe/post?u=2d904c1976a7d4a8f2e85d7f4&id=ff1fd21f24&f_id=00d4eae1f0" method="post" target="_blank">
-                <input 
-                    type="email" 
+        <div class="newsletter-inner">
+            <span class="section-label" data-reveal>Stay Close</span>
+            <h2 class="section-title" data-reveal data-reveal-delay="1">Join The List</h2>
+            <p class="newsletter-subtitle" data-reveal data-reveal-delay="2">
+                Be first to know when Big Money Mike premieres. Exclusive updates and behind-the-scenes content, straight to your inbox.
+            </p>
+            <form class="signup-form" id="signupForm" data-reveal data-reveal-delay="3"
+                action="https://gmail.us6.list-manage.com/subscribe/post?u=2d904c1976a7d4a8f2e85d7f4&id=ff1fd21f24&f_id=00d4eae1f0"
+                method="post"
+                target="_blank">
+                <input
+                    type="email"
                     name="EMAIL"
-                    class="email-input" 
-                    placeholder="Enter your email address" 
+                    class="email-input"
+                    placeholder="Your email address"
                     required
                     id="emailInput"
                 >
-                <!-- Honeypot field to prevent bots -->
-                <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                <div style="position:absolute;left:-5000px;" aria-hidden="true">
                     <input type="text" name="b_2d904c1976a7d4a8f2e85d7f4_ff1fd21f24" tabindex="-1" value="">
                 </div>
-                <button type="submit" class="submit-btn">Join The List</button>
+                <button type="submit" class="submit-btn">Subscribe</button>
             </form>
-            
             <div class="success-message" id="successMessage">
-                Thank you! You're on the list. We'll keep you posted on all things Big Money Mike.
+                You're on the list — we'll keep you posted.
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 Big Money Mike Documentary. All rights reserved.</p>
-        <p style="margin-top: 0.5rem; opacity: 0.8;">A <a href="https://longoddsproductions.com/" target="_blank" rel="noopener noreferrer" style="color: var(--soft-teal); text-decoration: none; transition: color 0.3s ease;">Long Odds Productions</a> Film</p>
-        <div class="social-links">
-            <a href="#instagram">Instagram</a>
-            <a href="#facebook">Facebook</a>
-            <a href="#twitter">Twitter</a>
+        <div class="footer-inner">
+            <div class="footer-logo">Big Money Mike</div>
+            <div class="social-links">
+                <a href="#instagram">Instagram</a>
+                <a href="#facebook">Facebook</a>
+                <a href="#twitter">Twitter</a>
+            </div>
+            <p class="footer-production">
+                A <a href="https://longoddsproductions.com/" target="_blank" rel="noopener noreferrer">Long Odds Productions</a> Film
+            </p>
+            <p class="footer-copyright">&copy; 2026 Big Money Mike Documentary. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
-        // Navigation toggle for mobile
-        const navToggle = document.getElementById('navToggle');
-        const navLinks = document.getElementById('navLinks');
-        const navbar = document.getElementById('navbar');
+        // Navigation
+        const navbar  = document.getElementById('navbar');
+        const toggle  = document.getElementById('navToggle');
+        const links   = document.getElementById('navLinks');
 
-        navToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        }, { passive: true });
+
+        toggle.addEventListener('click', () => {
+            const open = links.classList.toggle('active');
+            toggle.classList.toggle('active', open);
         });
 
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', (e) => {
+        document.querySelectorAll('.nav-links a').forEach(a => {
+            a.addEventListener('click', e => {
                 e.preventDefault();
-                navLinks.classList.remove('active');
-                
-                const targetId = link.getAttribute('href').substring(1);
-                const targetSection = document.getElementById(targetId);
-                
-                if (targetSection) {
-                    const navHeight = navbar.offsetHeight;
-                    const targetPosition = targetSection.offsetTop - navHeight;
-                    
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                }
+                links.classList.remove('active');
+                toggle.classList.remove('active');
+                const target = document.getElementById(a.getAttribute('href').slice(1));
+                if (target) window.scrollTo({ top: target.offsetTop - navbar.offsetHeight, behavior: 'smooth' });
             });
         });
 
-        // Add shadow to navbar on scroll
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 0) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
+        document.getElementById('heroScroll').addEventListener('click', () => {
+            document.getElementById('trailer').scrollIntoView({ behavior: 'smooth' });
         });
 
-        // Random tagline on page load
+        // Random tagline
         const taglines = [
             "In a sport measured in milliseconds, he's forged a career spanning four decades. Can Mike Smith beat the clock one more time?",
             "In a life forged through defying impossible odds, an American Jockey seeks one more miracle… for the last time.",
-            "All I need is one horse. One horse can take you around the world and back again. -Mike Smith",
+            "All I need is one horse. One horse can take you around the world and back again.",
             "The last of a dying breed. A film about greatness, risk, and the price of staying sharp when the margin for error is zero.",
-            "When the moment is biggest, he's there. The Mike Smith story — the all-time Breeders' Cup win leader and Triple Crown champion who redefined clutch under pressure."
+            "When the moment is biggest, he's there. The all-time Breeders' Cup win leader and Triple Crown champion who redefined clutch under pressure."
         ];
-        
-        // Select random tagline on page load
-        const randomTagline = taglines[Math.floor(Math.random() * taglines.length)];
-        document.querySelector('.tagline').textContent = randomTagline;
+        document.querySelector('.hero-tagline').textContent = taglines[Math.floor(Math.random() * taglines.length)];
 
-        // Gallery Lightbox
-        const galleryItems = document.querySelectorAll('.gallery-item');
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImage = document.getElementById('lightboxImage');
-        const lightboxClose = document.getElementById('lightboxClose');
-        const lightboxPrev = document.getElementById('lightboxPrev');
-        const lightboxNext = document.getElementById('lightboxNext');
-        
-        let currentImageIndex = 0;
-        const images = Array.from(galleryItems).map(item => item.dataset.image);
-
-        function openLightbox(index) {
-            currentImageIndex = index;
-            lightboxImage.src = images[currentImageIndex];
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeLightbox() {
-            lightbox.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        function showPrevImage() {
-            currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
-            lightboxImage.src = images[currentImageIndex];
-        }
-
-        function showNextImage() {
-            currentImageIndex = (currentImageIndex + 1) % images.length;
-            lightboxImage.src = images[currentImageIndex];
-        }
-
-        // Gallery item click handlers
-        galleryItems.forEach((item, index) => {
-            item.addEventListener('click', () => openLightbox(index));
-        });
-
-        // Lightbox controls
-        lightboxClose.addEventListener('click', closeLightbox);
-        lightboxPrev.addEventListener('click', showPrevImage);
-        lightboxNext.addEventListener('click', showNextImage);
-
-        // Close lightbox on background click
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
-                closeLightbox();
-            }
-        });
-
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (!lightbox.classList.contains('active')) return;
-            
-            if (e.key === 'Escape') closeLightbox();
-            if (e.key === 'ArrowLeft') showPrevImage();
-            if (e.key === 'ArrowRight') showNextImage();
-        });
-
-        // Mailchimp form handling with success message
-        document.getElementById('signupForm').addEventListener('submit', function(e) {
-            const email = document.getElementById('emailInput').value;
-            const successMessage = document.getElementById('successMessage');
-            
-            // Show success message (form will submit to Mailchimp in new tab)
-            setTimeout(() => {
-                successMessage.classList.add('show');
-                
-                // Hide success message after 5 seconds
-                setTimeout(() => {
-                    successMessage.classList.remove('show');
-                }, 5000);
-            }, 100);
-        });
-
-        // Smooth scroll for scroll indicator
-        document.querySelector('.scroll-indicator').addEventListener('click', function() {
-            document.querySelector('.trailer-section').scrollIntoView({ 
-                behavior: 'smooth' 
+        // Scroll reveal
+        const revealObs = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) { e.target.classList.add('revealed'); revealObs.unobserve(e.target); }
             });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('[data-reveal]').forEach(el => revealObs.observe(el));
+
+        // Stats counter
+        function countUp(el, target, duration) {
+            const start = performance.now();
+            const tick = now => {
+                const p = Math.min((now - start) / duration, 1);
+                const ease = 1 - Math.pow(1 - p, 3);
+                el.textContent = Math.floor(ease * target);
+                if (p < 1) requestAnimationFrame(tick);
+                else el.textContent = target;
+            };
+            requestAnimationFrame(tick);
+        }
+
+        const statsObs = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.querySelectorAll('.stat-count').forEach(c => countUp(c, +c.dataset.target, 1800));
+                    statsObs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.3 });
+        document.querySelectorAll('.stat-item').forEach(el => statsObs.observe(el));
+
+        // Lightbox
+        const lightbox   = document.getElementById('lightbox');
+        const lbImage    = document.getElementById('lightboxImage');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const images = Array.from(galleryItems).map(el => ({ src: el.dataset.image, alt: el.querySelector('img').alt }));
+        let idx = 0;
+
+        const openLB  = i  => { idx = i; lbImage.src = images[i].src; lbImage.alt = images[i].alt; lightbox.classList.add('active'); document.body.style.overflow = 'hidden'; };
+        const closeLB = () => { lightbox.classList.remove('active'); document.body.style.overflow = ''; };
+        const nav     = d  => { idx = (idx + d + images.length) % images.length; lbImage.src = images[idx].src; lbImage.alt = images[idx].alt; };
+
+        galleryItems.forEach((el, i) => el.addEventListener('click', () => openLB(i)));
+        document.getElementById('lightboxClose').addEventListener('click', closeLB);
+        document.getElementById('lightboxPrev').addEventListener('click', () => nav(-1));
+        document.getElementById('lightboxNext').addEventListener('click', () => nav(1));
+        lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLB(); });
+        document.addEventListener('keydown', e => {
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape')      closeLB();
+            if (e.key === 'ArrowLeft')   nav(-1);
+            if (e.key === 'ArrowRight')  nav(1);
+        });
+
+        // Newsletter
+        document.getElementById('signupForm').addEventListener('submit', () => {
+            setTimeout(() => {
+                const m = document.getElementById('successMessage');
+                m.classList.add('show');
+                setTimeout(() => m.classList.remove('show'), 5000);
+            }, 100);
         });
     </script>
 </body>
