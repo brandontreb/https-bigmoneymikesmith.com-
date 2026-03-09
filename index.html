@@ -611,18 +611,22 @@
             line-height: 1.7;
         }
 
+        .stats-grid .stat-item:nth-child(n+5) {
+            border-top: 1px solid rgba(200,145,45,0.1);
+        }
+
         @media (max-width: 900px) {
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
-            .stat-item:nth-child(2) { border-right: none; }
-            .stat-item:nth-child(3),
-            .stat-item:nth-child(4) { border-top: 1px solid rgba(200,145,45,0.1); }
-            .stat-item:nth-child(4) { border-right: none; }
+            .stats-grid .stat-item:nth-child(n+5) { border-top: none; }
+            .stats-grid .stat-item:nth-child(even) { border-right: none; }
+            .stats-grid .stat-item:nth-child(n+3) { border-top: 1px solid rgba(200,145,45,0.1); }
         }
 
         @media (max-width: 480px) {
             .stats-grid { grid-template-columns: 1fr; }
             .stat-item { border-right: none; border-bottom: 1px solid rgba(200,145,45,0.1); padding: 3.5rem 2rem; }
             .stat-item:last-child { border-bottom: none; }
+            .stats-grid .stat-item:nth-child(n) { border-top: none; }
         }
 
         /* GALLERY */
@@ -1005,27 +1009,49 @@
         <div class="stats-grid">
             <div class="stat-item" data-reveal>
                 <span class="stat-number">
-                    <span class="stat-count" data-target="40">0</span><span class="stat-suffix">+</span>
+                    <span class="stat-count" data-target="35017">0</span>
                 </span>
-                <div class="stat-label">Years at the<br>Highest Level</div>
+                <div class="stat-label">Career<br>Starts</div>
             </div>
             <div class="stat-item" data-reveal data-reveal-delay="1">
+                <span class="stat-number">
+                    <span class="stat-count" data-target="5794">0</span>
+                </span>
+                <div class="stat-label">Career<br>Wins</div>
+            </div>
+            <div class="stat-item" data-reveal data-reveal-delay="2">
                 <span class="stat-number">
                     <span class="stat-prefix">$</span><span class="stat-count" data-target="356">0</span><span class="stat-suffix">M+</span>
                 </span>
                 <div class="stat-label">Career<br>Earnings</div>
             </div>
-            <div class="stat-item" data-reveal data-reveal-delay="2">
-                <span class="stat-number">
-                    <span class="stat-count" data-target="52">0</span>
-                </span>
-                <div class="stat-label">Oldest Triple Crown<br>Winner in History</div>
-            </div>
             <div class="stat-item" data-reveal data-reveal-delay="3">
+                <span class="stat-number">
+                    <span class="stat-count" data-target="17">0</span><span class="stat-suffix">%</span>
+                </span>
+                <div class="stat-label">Career<br>Win Rate</div>
+            </div>
+            <div class="stat-item" data-reveal data-reveal-delay="4">
+                <span class="stat-number">
+                    <span class="stat-count" data-target="27">0</span>
+                </span>
+                <div class="stat-label">Breeders' Cup Wins<br><em style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.75em;letter-spacing:0.05em;text-transform:none;color:rgba(200,145,45,0.55)">All-Time Record</em></div>
+            </div>
+            <div class="stat-item" data-reveal data-reveal-delay="5">
                 <span class="stat-number">
                     <span class="stat-prefix">#</span><span class="stat-count" data-target="1">0</span>
                 </span>
                 <div class="stat-label">All-Time Grade 1<br>Stakes Wins Leader</div>
+            </div>
+            <div class="stat-item" data-reveal data-reveal-delay="6">
+                <span class="stat-number">
+                    <span class="stat-count" data-target="52">0</span>
+                </span>
+                <div class="stat-label">Age — Oldest Triple<br>Crown Winner in History</div>
+            </div>
+            <div class="stat-item" data-reveal data-reveal-delay="7">
+                <span class="stat-number">2003</span>
+                <div class="stat-label">Hall of Fame<br>Induction</div>
             </div>
         </div>
     </section>
@@ -1216,13 +1242,14 @@
 
         // Stats counter
         function countUp(el, target, duration) {
+            const fmt = n => n >= 1000 ? n.toLocaleString('en-US') : String(n);
             const start = performance.now();
             const tick = now => {
                 const p = Math.min((now - start) / duration, 1);
                 const ease = 1 - Math.pow(1 - p, 3);
-                el.textContent = Math.floor(ease * target);
+                el.textContent = fmt(Math.floor(ease * target));
                 if (p < 1) requestAnimationFrame(tick);
-                else el.textContent = target;
+                else el.textContent = fmt(target);
             };
             requestAnimationFrame(tick);
         }
