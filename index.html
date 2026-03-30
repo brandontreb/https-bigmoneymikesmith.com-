@@ -548,7 +548,7 @@
 
         /* STATS */
         .stats-section {
-            padding: 0;
+            padding: 4rem 0 0;
             background: var(--void);
             position: relative;
             overflow: hidden;
@@ -863,6 +863,86 @@
             .email-input { border-right: 1px solid rgba(200,145,45,0.18); border-bottom: none; }
         }
 
+        /* CONTACT */
+        .contact-section {
+            padding: 9rem 2rem;
+            background: var(--void);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 0%, rgba(200,145,45,0.06) 0%, transparent 55%);
+            pointer-events: none;
+        }
+
+        .contact-inner {
+            max-width: 580px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-inner .section-title { margin-bottom: 3rem; }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            text-align: left;
+        }
+
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem 1.4rem;
+            font-family: 'Libre Baskerville', serif;
+            font-size: 0.88rem;
+            background: rgba(8,6,4,0.6);
+            border: 1px solid rgba(200,145,45,0.18);
+            color: var(--cream);
+            outline: none;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+        }
+
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 140px;
+            line-height: 1.65;
+        }
+
+        .contact-form input[type="email"]::placeholder,
+        .contact-form textarea::placeholder { color: var(--stone); font-style: italic; }
+
+        .contact-form input[type="email"]:focus,
+        .contact-form textarea:focus { border-color: rgba(200,145,45,0.45); }
+
+        .contact-form .submit-btn {
+            width: 100%;
+            margin-top: 1.25rem;
+            padding: 1rem;
+        }
+
+        .contact-honeypot { display: none; }
+
+        .contact-success {
+            display: none;
+            margin-top: 1.5rem;
+            font-family: 'Spectral', serif;
+            font-size: 1.05rem;
+            font-style: italic;
+            color: var(--amber);
+            text-align: center;
+        }
+
+        .contact-success.show { display: block; animation: fade-in 0.5s ease; }
+
         /* FOOTER */
         footer {
             padding: 4rem 2rem;
@@ -955,6 +1035,7 @@
                 <li><a href="#story">Story</a></li>
                 <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#updates">Updates</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
     </nav>
@@ -1006,6 +1087,9 @@
 
     <!-- Stats -->
     <section class="stats-section">
+        <div class="section-header" data-reveal style="text-align:center;margin-bottom:3rem;">
+            <h2 class="section-title">The Numbers Behind the Legend</h2>
+        </div>
         <div class="stats-grid">
             <div class="stat-item" data-reveal>
                 <span class="stat-number">
@@ -1152,7 +1236,7 @@
             <span class="section-label" data-reveal>Stay Close</span>
             <h2 class="section-title" data-reveal data-reveal-delay="1">Join The List</h2>
             <p class="newsletter-subtitle" data-reveal data-reveal-delay="2">
-                Be first to know when Big Money Mike premieres. Exclusive updates and behind-the-scenes content, straight to your inbox.
+                Get exclusive updates, behind-the-scenes content, premiere announcements, and first access to merch.
             </p>
             <form class="signup-form" id="signupForm" data-reveal data-reveal-delay="3"
                 action="https://gmail.us6.list-manage.com/subscribe/post?u=2d904c1976a7d4a8f2e85d7f4&id=ff1fd21f24&f_id=00d4eae1f0"
@@ -1173,6 +1257,47 @@
             </form>
             <div class="success-message" id="successMessage">
                 You're on the list — we'll keep you posted.
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact-section" id="contact">
+        <div class="contact-inner">
+            <span class="section-label" data-reveal>Get In Touch</span>
+            <h2 class="section-title" data-reveal data-reveal-delay="1">Reach the Team</h2>
+            <p class="newsletter-subtitle" data-reveal data-reveal-delay="2">
+                For collaboration, sponsorship, and press inquiries, we'd love to hear from you. Drop us a line and we'll get back to you shortly.
+            </p>
+            <form
+                class="contact-form"
+                name="contact"
+                method="POST"
+                data-netlify="true"
+                netlify-honeypot="bot-field"
+                data-reveal
+                data-reveal-delay="3"
+                id="contactForm"
+            >
+                <input type="hidden" name="form-name" value="contact">
+                <p class="contact-honeypot">
+                    <label>Don't fill this out: <input name="bot-field"></label>
+                </p>
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Your email address"
+                    required
+                >
+                <textarea
+                    name="message"
+                    placeholder="Your message"
+                    required
+                ></textarea>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+            <div class="contact-success" id="contactSuccess">
+                Message received — we'll be in touch.
             </div>
         </div>
     </section>
@@ -1227,7 +1352,8 @@
             "In a life forged through defying impossible odds, an American Jockey seeks one more miracle… for the last time.",
             "All I need is one horse. One horse can take you around the world and back again.",
             "The last of a dying breed. A film about greatness, risk, and the price of staying sharp when the margin for error is zero.",
-            "When the moment is biggest, he's there. The all-time Breeders' Cup win leader and Triple Crown champion who redefined clutch under pressure."
+            "When the moment is biggest, he's there. The all-time Breeders' Cup win leader and Triple Crown champion who redefined clutch under pressure.",
+            "The Greatest Jockey in American Racing History. One Final Run."
         ];
         document.querySelector('.hero-tagline').textContent = taglines[Math.floor(Math.random() * taglines.length)];
 
@@ -1294,6 +1420,18 @@
                 setTimeout(() => m.classList.remove('show'), 5000);
             }, 100);
         });
+        // Contact form — Netlify submission
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const data = new FormData(contactForm);
+                await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(data).toString() });
+                contactForm.style.display = 'none';
+                const success = document.getElementById('contactSuccess');
+                success.classList.add('show');
+            });
+        }
     </script>
 </body>
 </html>
